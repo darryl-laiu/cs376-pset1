@@ -7,70 +7,8 @@
         <button id="getGalleries">Get Galleries</button>
         <div id="output"></div>
 
-        <script>
-            let button = document.getElementById("getGalleries");
-            button.addEventListener("click", getGalleries);
+        <div id="objects"></div>
 
-            // function getObjects() {
-
-            // }
-
-            function getGalleries() {
-                fetch('https://api.harvardartmuseums.org/gallery?apikey=fc1b68f0-b251-11e8-b0af-a198bfdbf6ce')
-                .then((response) => response.json())
-                .then((data) => {
-                    let totalRecords = data.info.totalrecords;
-                    //let page;
-                    let url = 'https://api.harvardartmuseums.org/gallery?apikey=fc1b68f0-b251-11e8-b0af-a198bfdbf6ce&size=' + totalRecords;
-
-                    let output = `<h2>Galleries</h2>`;
-                    fetch(url)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        let records = data.records;
-
-                        records.forEach((gallery) => {
-                          output += `
-                          <div>
-                            <button id="${gallery.id}"> ${gallery.name} </button>
-                          </div>
-                          `;
-                        });
-                        document.getElementById('output').innerHTML = output;
-                    });
-
-
-                    function getObjects() {
-                        let url = 'https://api.harvardartmuseums.org/object?apikey=fc1b68f0-b251-11e8-b0af-a198bfdbf6ce'
-                    }
-
-
-                    //let count = 0;
-
-                    // for(page = 1; page <= pages; page++) {
-                    //     let url = 'https://api.harvardartmuseums.org/gallery?apikey=fc1b68f0-b251-11e8-b0af-a198bfdbf6ce&page=' + page;
-                    //     //console.log(url);
-
-
-                        // fetch(url)
-                        // .then((response) => response.json())
-                        // .then((data) => {
-                        //     let records = data.records;
-
-
-
-                        //     records.forEach((gallery) => {
-                        //         //count += 1;
-                        //         console.log(gallery.name);
-                        //         //console.log(count);
-                        //     });
-                        // });
-                   // }
-
-                });
-            }
-
-
-        </script>
+        <script type="text/javascript" src="harvardart.js"></script>
     </body>
 </html>
