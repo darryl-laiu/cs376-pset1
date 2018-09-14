@@ -5,7 +5,7 @@
     </head>
     <body>
         <button id="getGalleries">Get Galleries</button>
-        <button id="getForm">Get Form</button>
+        <!--<button id="getForm">Get Form</button>-->
 
         <div id="output"></div>
 
@@ -15,14 +15,52 @@
         <div id='image'></div>
 
         <div id="createForm">
-            <form class="object">
-                 <input type="text" name="title" placeholder="title"/>
-                 <input type="text" name="yearmade" placeholder="yearmade"/>
-                 <input type="text" name="objectnumber" placeholder="objectnumber"/>
-                 <input type="text" name="technique" placeholder="technique"/>
-                 <input type="text" name="keyword" placeholder="keyword"/>
-                 <button type="submit">Submit</button>
+            <form id="objectForm">
+                <div>
+                    <input type="radio" id="object" name="type" value="object">
+                    <label for="object">Object</label>
+
+                    <input type="text" name="title" placeholder="title"/>
+                    <input type="text" name="yearmade" placeholder="yearmade"/>
+                    <input type="text" name="objectnumber" placeholder="objectnumber"/>
+                    <input type="text" name="technique" placeholder="technique"/>
+                    <input type="text" name="keyword" placeholder="keyword"/>
+                    <button type="submit">Submit</button>
+                </div>
+
              </form>
+            <form id="galleryForm">
+                <div>
+                    <input type="radio" id="gallery" name="type" value="gallery">
+                    <label for="gallery">Gallery</label>
+
+                    <input type="text" name="name" placeholder="name"/>
+                    <input type="text" name="theme" placeholder="theme"/>
+                    <input type="text" name="labeltext" placeholder="labeltext"/>
+                    <input type="text" name="id" placeholder="id"/>
+                    <input type="text" name="floor" placeholder="floor"/>
+
+                    <button type="submit">Submit</button>
+                </div>
+
+            </form>
+
+            <form id="exhibitionForm">
+                <div>
+                    <input type="radio" id="exhibition" name="type" value="exhibition">
+                    <label for="exhibition">Exhibition</label>
+
+                    <input type="text" name="title" placeholder="title"/>
+                    <input type="text" name="enddate" placeholder="enddate"/>
+                    <input type="text" name="begindate" placeholder="begindate"/>
+                    <input type="text" name="id" placeholder="id"/>
+                    <input type="text" name="exhibitionid" placeholder="exhibitionid"/>
+
+                    <button type="submit">Submit</button>
+                </div>
+
+            </form>
+
         </div>
 
         <div class="results__display"></div>

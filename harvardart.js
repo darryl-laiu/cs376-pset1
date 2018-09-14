@@ -122,58 +122,75 @@ async function getGalleries() {
     document.getElementById('output').innerHTML = output;
 }
 
-/**
- * Retrieves input data from a form and returns it as a JSON object.
- * @param  {HTMLFormControlsCollection} elements  the form elements
- * @return {Object}                               form data as an object literal
- */
-const formToJSON = elements => [].reduce.call(elements, (data, element) => {
+class manageForm {
+    constructor(formId) {
+        /**
+        * Retrieves input data from a form and returns it as a JSON object.
+        * @param  {HTMLFormControlsCollection} elements  the form elements
+        * @return {Object}                               form data as an object literal
+         */
+        const formToJSON = elements => [].reduce.call(elements, (data, element) => {
 
-  data[element.name] = element.value;
-  return data;
+            data[element.name] = element.value;
+            return data;
 
-}, {});
+        }, {});
 
-const handleFormSubmit = event => {
+        const handleFormSubmit = event => {
 
-  // Stop the form from submitting since we’re handling that with AJAX.
-  event.preventDefault();
+          // Stop the form from submitting since we’re handling that with AJAX.
+          event.preventDefault();
 
-  // Call our function to get the form data.
-  const data = formToJSON(form.elements);
+          // Call our function to get the form data.
+          const data = formToJSON(form.elements);
 
-  // Demo only: print the form data onscreen as a formatted JSON object.
-  //const dataContainer = document.getElementsByClassName('results__display')[0];
+          // Demo only: print the form data onscreen as a formatted JSON object.
+          const dataContainer = document.getElementsByClassName('results__display')[0];
 
-  // Use `JSON.stringify()` to make the output valid, human-readable JSON.
-  //dataContainer.textContent = JSON.stringify(data, null, "  ");
+          // Use `JSON.stringify()` to make the output valid, human-readable JSON.
+          dataContainer.textContent = JSON.stringify(data, null, "  ");
 
-  // ...this is where we’d actually do something with the form data...
-  search(data);
-};
+          // ...this is where we’d actually do something with the form data...
+          search(data);
+        };
 
-const form = document.getElementsByClassName('object')[0];
-form.addEventListener('submit', handleFormSubmit);
+        const form = document.getElementById(formId);
+        form.addEventListener('submit', handleFormSubmit);
+    }
+}
+
+const objectForm = new manageForm("objectForm");
+const galleryForm = new manageForm("galleryForm");
+const exhibitionForm = new manageForm("exhibitionForm");
+
 
 async function search(data) {
     let parameter;
     let searchTerm;
+    let type;
 
     for (let record in data) {
-        if(data[record] !== "") {
+        if(data[record] !== "" && record !== "type") {
             // console.log(data);
             // console.log(data[record]);
+            type = data.type;
             parameter = record;
             searchTerm = data[record];
+             console.log(data);
+            // console.log(record);
+            // console.log(searchTerm);
         }
     }
 
+    console.log(type);
+
     //note to change the construction of url if need to use 'q=field:value'
-    let url = 'https://api.harvardartmuseums.org/object/?apikey=fc1b68f0-b251-11e8-b0af-a198bfdbf6ce&size=100&' + parameter + "=" + searchTerm;
+    let url = 'https://api.harvardartmuseums.org/' + type + '/?apikey=fc1b68f0-b251-11e8-b0af-a198bfdbf6ce&size=100&q=' + parameter + ':' + searchTerm;
+    console.log(url);
     let res = await fetch(url);
     res = await res.json();
     results = res.records;
-    console.log(results);
+    //console.log(results);
     let pages = res.info.pages;
     let pageNum = "&page="
     for(let i = 2; i <= pages; i++) {
@@ -195,4 +212,8 @@ async function search(data) {
     }
     document.getElementsByClassName('results__display')[0].innerHTML = output;
 
+}
+
+function getDetails(id) {
+    
 }
