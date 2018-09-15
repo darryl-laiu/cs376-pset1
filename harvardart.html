@@ -15,6 +15,7 @@
         <div id='image'></div>
 
         <div id="createForm">
+            <h4>Fill out only one field for each form and click the respective submit button to enter that search</h4>
             <form id="objectForm">
                 <div>
                     <input type="radio" id="object" name="type" value="object">
@@ -58,7 +59,21 @@
 
                     <button type="submit">Submit</button>
                 </div>
+            </form>
 
+            <form id="personForm">
+                <div>
+                    <input type="radio" id="person" name="type" value="person">
+                    <label for="person">Person</label>
+
+                    <input type="text" name="displayname" placeholder="displayname"/>
+                    <input type="text" name="gender" placeholder="gender"/>
+                    <input type="text" name="culture" placeholder="culture"/>
+                    <input type="text" name="deathplace" placeholder="deathplace"/>
+                    <input type="text" name="birthplace" placeholder="birthplace"/>
+
+                    <button type="submit">Submit</button>
+                </div>
             </form>
 
         </div>
