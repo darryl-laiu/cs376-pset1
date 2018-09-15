@@ -1,3 +1,4 @@
+//Darryl Laiu
 //Additional note: Discussed code with Matthias and Toby
 
 let button = document.getElementById("getGalleries");
